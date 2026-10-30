@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>مدیریت خیاطی</title>
+
+<link rel="stylesheet" href="./output.css">
+
+</head>
+
+
+<body class="bg-gray-100 min-h-screen">
+
+
+<!-- =========================
+     Header
+========================= -->
+
+<header class="max-w-5xl mx-auto mt-8 px-4">
+
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+
+<h1
+id="siteTitle"
+class="text-3xl md:text-4xl font-bold text-blue-700">
+مدیریت خیاطی
+</h1>
+
+
+<button
+id="languageBtn"
+onclick="changeLanguage()"
+class="bg-gray-800 text-white px-5 py-2 rounded-lg hover:bg-gray-700">
+
+English
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<!-- =========================
+     Add Order
+========================= -->
+
+<div class="max-w-5xl mx-auto mt-10 bg-white p-8 rounded-xl shadow">
+
+<h2
+id="orderTitle"
+class="text-2xl font-bold mb-6">
+
+ثبت سفارش جدید
+
+</h2>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+
+<input
+id="customerName"
+placeholder="نام مشتری"
+class="border p-3 rounded-lg">
+
+
+<input
+id="phone"
+placeholder="شماره تماس"
+class="border p-3 rounded-lg">
+
+
+<input
+id="clothingType"
+placeholder="نوع لباس"
+class="border p-3 rounded-lg">
+
+
+<input
+id="price"
+type="number"
+placeholder="قیمت"
+class="border p-3 rounded-lg">
+
+
+<input
+id="advance"
+type="number"
+placeholder="پیش پرداخت"
+class="border p-3 rounded-lg">
+
+
+<input
+id="delivery"
+type="date"
+class="border p-3 rounded-lg">
+
+
+</div>
+
+
+<button
+id="saveOrder"
+class="mt-5 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+
+ثبت سفارش
+
+</button>
+
+
+</div>
+
+
+
+<!-- =========================
+     Dashboard
+========================= -->
+
+<div class="max-w-5xl mx-auto mt-10 px-4">
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+
+
+<!-- Sales -->
+
+<div
+id="salesCard"
+class="bg-blue-600 text-white p-5 rounded-xl cursor-pointer shadow">
+
+<h3 id="salesTitle">
+فروش کل
+</h3>
+
+<p
+id="totalSales"
+class="text-3xl font-bold mt-2">
+
+0
+
+</p>
+
+</div>
+
+
+
+<!-- Orders -->
+
+<div
+id="ordersCard"
+class="bg-green-600 text-white p-5 rounded-xl cursor-pointer shadow">
+
+<h3 id="ordersTitle">
+تعداد سفارشات
+</h3>
+
+<p
+id="totalOrders"
+class="text-3xl font-bold mt-2">
+
+0
+
+</p>
+
+</div>
+
+
+
+<!-- Remaining -->
+
+<div
+id="remainingCard"
+class="bg-purple-600 text-white p-5 rounded-xl cursor-pointer shadow">
+
+<h3 id="remainingTitle">
+باقی مانده
+</h3>
+
+<p
+id="totalRemaining"
+class="text-3xl font-bold mt-2">
+
+0
+
+</p>
+
+</div>
+
+
+
+<!-- Profit -->
+
+<div
+id="profitCard"
+class="bg-orange-600 text-white p-5 rounded-xl cursor-pointer shadow">
+
+<h3 id="profitTitle">
+سود
+</h3>
+
+<p
+id="profit"
+class="text-3xl font-bold mt-2">
+
+0
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     Search
+========================= -->
+
+<div class="max-w-5xl mx-auto mt-10 px-4">
+
+<input
+id="searchOrder"
+type="text"
+placeholder="جستجوی مشتری یا نوع لباس..."
+class="border p-3 rounded-lg w-full">
+
+</div>
+
+
+
+<!-- =========================
+     Orders Table
+========================= -->
+
+<div class="max-w-5xl mx-auto mt-5 bg-white p-8 rounded-xl shadow overflow-x-auto">
+
+<h2
+id="ordersTitle"
+class="text-2xl font-bold mb-5">
+
+سفارشات
+
+</h2>
+
+
+<table class="w-full border-collapse border">
+
+
+<thead>
+
+<tr class="bg-gray-200">
+
+
+<th
+id="customerHead"
+class="border p-3">
+مشتری
+</th>
+
+
+<th
+id="phoneHead"
+class="border p-3">
+شماره تماس
+</th>
+
+
+<th
+id="clothingHead"
+class="border p-3">
+نوع لباس
+</th>
+
+
+<th
+id="priceHead"
+class="border p-3">
+قیمت
+</th>
+
+
+<th
+id="advanceHead"
+class="border p-3">
+پیش پرداخت
+</th>
+
+
+<th
+id="remainingHead"
+class="border p-3">
+باقی مانده
+</th>
+
+
+<th
+id="deliveryHead"
+class="border p-3">
+تاریخ تحویل
+</th>
+
+
+<th
+id="actionHead"
+class="border p-3">
+عملیات
+</th>
+
+
+</tr>
+
+</thead>
+
+
+<tbody id="ordersTable">
+
+</tbody>
+
+
+</table>
+
+</div>
+
+
+
+<!-- =========================
+     Real Expenses
+========================= -->
+
+<div class="max-w-5xl mx-auto mt-10 bg-white p-8 rounded-xl shadow">
+
+<h2
+id="expenseTitle"
+class="text-2xl font-bold mb-5">
+
+مصارف واقعی خیاطی
+
+</h2>
+
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+
+<input
+id="expenseCategory"
+placeholder="دسته‌بندی مصرف"
+class="border p-3 rounded-lg">
+
+
+<input
+id="realExpenseAmount"
+type="number"
+placeholder="مبلغ"
+class="border p-3 rounded-lg">
+
+
+<input
+id="expenseDate"
+type="date"
+class="border p-3 rounded-lg">
+
+
+</div>
+
+
+<button
+id="addRealExpense"
+class="mt-5 bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700">
+
+افزودن مصرف
+
+</button>
+
+
+
+<!-- Expense History -->
+
+<h3
+id="expenseHistoryTitle"
+class="text-xl font-bold mt-8 mb-4">
+
+تاریخچه مصارف
+
+</h3>
+
+
+<div class="overflow-x-auto">
+
+<table class="w-full border-collapse border">
+
+
+<thead>
+
+<tr class="bg-gray-200">
+
+
+<th
+id="categoryHead"
+class="border p-3">
+دسته‌بندی
+</th>
+
+
+<th
+id="amountHead"
+class="border p-3">
+مبلغ
+</th>
+
+
+<th
+id="dateHead"
+class="border p-3">
+تاریخ
+</th>
+
+
+<th
+id="expenseActionHead"
+class="border p-3">
+عملیات
+</th>
+
+
+</tr>
+
+</thead>
+
+
+<tbody id="realExpenseTable">
+
+</tbody>
+
+
+</table>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =========================
+     Monthly Report
+========================= -->
+
+<div class="max-w-5xl mx-auto mt-10 bg-white p-8 rounded-xl shadow">
+
+<h2
+id="monthlyTitle"
+class="text-2xl font-bold">
+
+گزارش ماهانه
+
+</h2>
+
+
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-5">
+
+
+<div class="bg-blue-500 text-white p-5 rounded-lg">
+
+<h3 id="monthlySalesTitle">
+فروش ماهانه
+</h3>
+
+<p
+id="monthlySales"
+class="text-2xl font-bold mt-2">
+
+0
+
+</p>
+
+</div>
+
+
+
+<div class="bg-green-500 text-white p-5 rounded-lg">
+
+<h3 id="monthlyOrdersTitle">
+سفارشات ماهانه
+</h3>
+
+<p
+id="monthlyOrders"
+class="text-2xl font-bold mt-2">
+
+0
+
+</p>
+
+</div>
+
+
+
+<div class="bg-red-500 text-white p-5 rounded-lg">
+
+<h3 id="monthlyExpensesTitle">
+مصارف ماهانه
+</h3>
+
+<p
+id="monthlyExpenses"
+class="text-2xl font-bold mt-2">
+
+0
+
+</p>
+
+</div>
+
+
+
+<div class="bg-purple-500 text-white p-5 rounded-lg">
+
+<h3 id="monthlyProfitTitle">
+سود ماهانه
+</h3>
+
+<p
+id="monthlyProfit"
+class="text-2xl font-bold mt-2">
+
+0
+
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =========================
+     JavaScript
+========================= -->
+
+<script src="./script.js"></script>
+
+
+</body>
+
+</html>
